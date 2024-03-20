@@ -4,6 +4,6 @@
 - RL-Lecture-2 
 - RL-Lecture-3
 ## Applied Linear Algebra for Data Science:
-- ALADS-Lecture-1 
+- ALADS-Lecture-1 Introduction + Background Knowledge: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/1/ALADS-Introduction.html
 
 Hint: Other related material in other repository.
