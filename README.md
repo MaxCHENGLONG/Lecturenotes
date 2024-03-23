@@ -13,3 +13,4 @@
 - ALADS-Lecture-3
 
 Hint: Other related material in other repository.
+- Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
