@@ -7,10 +7,15 @@
 - RL-Assignment-1-Answer
 - RL-Lecture-4
 - RL-Lecture-5
+- RL-Lecture-6
+- RL-Lecture-7
 ## Applied Linear Algebra for Data Science:
 - ALADS-Lecture-1 Introduction + Background Knowledge: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/1/ALADS-Introduction.html
-- ALADS-Lecture-2
+- ALADS-Lecture-2 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/2/ALDS-FFS.html
 - ALADS-Lecture-3
+- ALADS-Lecture-4
+- ALADS-Lecture-5
+- ALADS-Lecture-6
 
 Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
