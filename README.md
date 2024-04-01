@@ -11,9 +11,9 @@
 - RL-Lecture-7
 ## Applied Linear Algebra for Data Science:
 - ALADS-Lecture-1 Introduction + Background Knowledge: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/1/ALADS-Introduction.html
-- ALADS-Lecture-2 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/2/ALDS-FFS.html
+- ALADS-Lecture-2 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/2/ALADS-FFS.html
 - ALADS-Assignment-1 See: ALADS-Lecturenotes/Ass1
-- ALADS-Lecture-3
+- ALADS-Lecture-3 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/3/ALADS-FFS2.html
 - ALADS-Lecture-4
 - ALADS-Lecture-5
 - ALADS-Lecture-6
