@@ -14,9 +14,10 @@
 - ALADS-Lecture-2 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/2/ALADS-FFS.html
 - ALADS-Assignment-1 See: ALADS-Lecturenotes/Ass1
 - ALADS-Lecture-3 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/3/ALADS-FFS2.html
-- ALADS-Lecture-4
+- ALADS-Lecture-4 LU Factorization: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/4/ALADS-LU.html
 - ALADS-Lecture-5
 - ALADS-Lecture-6
+- ALADS-Lecture-7
 
 Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
