@@ -21,13 +21,14 @@
 - ALADS-Assignment-1 See: ALADS-Lecturenotes/Ass1
 - ALADS-Lecture-3 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/3/ALADS-FFS2.html
 - ALADS-Lecture-4 LU Factorization: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/4/ALADS-LU.html
-- ALADS-Lecture-5 Cholesky Decomposition: 
-- ALADS-Lecture-6 QR Decomposition: 
-- ALADS-Lecture-7
+- ALADS-Lecture-5 Gaussian Elimination(LU Factorization): 
+- ALADS-Lecture-6 Cholesky Decomposition: 
+- ALADS-Lecture-7 QR Decomposition: 
 - ALADS-Lecture-8
 - ALADS-Lecture-9
 - ALADS-Lecture-10
 - ALADS-Lecture-11
+- ALADS-Lecture-12
 
 Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
