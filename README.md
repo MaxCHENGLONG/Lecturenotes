@@ -21,7 +21,7 @@
 - ALADS-Assignment-1 See: ALADS-Lecturenotes/Ass1
 - ALADS-Lecture-3 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/3/ALADS-FFS2.html
 - ALADS-Lecture-4 LU Factorization: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/4/ALADS-LU.html
-- ALADS-Lecture-5 Gaussian Elimination(LU Factorization): 
+- ALADS-Lecture-5 Gaussian Elimination(LU Factorization): https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/5/ALADS-GE+LU.html
 - ALADS-Lecture-6 Cholesky Decomposition: 
 - ALADS-Lecture-7 QR Decomposition: 
 - ALADS-Lecture-8
