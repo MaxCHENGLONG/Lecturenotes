@@ -30,6 +30,6 @@
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
 - Lecture 2
 
-Hint: Other related material in other repository.
+## Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
 - Applied Linear Algebra for Data Science: https://github.com/MaxCHENGLONG/1TD060-Applied-Linear-Algebra-for-Data-Science-UU 
