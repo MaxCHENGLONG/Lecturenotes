@@ -1,0 +1,695 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS224W-Machine Learning with Graph-Introduction</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="4b6028d5-94d6-4374-a542-7a8501553014" class="page sans"><header><h1 class="page-title">CS224W-Machine Learning with Graph-Introduction</h1><p class="page-description"></p></header><div class="page-body"><h1 id="476f38bf-7665-4138-9917-7907b67f5765" class="">Introduction to Machine Learning for Graphs</h1><p id="65296ed5-bfb9-484b-97f6-34f2a9d60139" class=""><strong><em>Definition</em></strong><em> </em>Graphs are a general language for describing and analyzing entities with relations/interactions.</p><p id="f36c40b0-79d2-4798-b1ef-5e8844c6fa55" class="">
+</p><p id="f0def75a-0fc8-4cc9-8ba8-8ccc86aa0d14" class=""><em><strong>图的数据种类：</strong></em></p><p id="2a8a048d-bc34-476c-8752-7b4024d1c627" class="">Event Graphs, Computer Networks, Disease Pathways, Food Webs, Particle Networks, Underground Networks, Social Networks, Economic Networks, Communication Networks, Citation Networks, Internet, Networks of Neurons, Knowledge Graphs, Regulatory Networks, Scene Graphs, Code Graphs, Molecules, 3D Shapes.</p><p id="ea2429af-f5c9-4cb5-b2a8-3c7b346ea3e2" class="">
+</p><p id="29906fe2-e0ae-4fcd-a6f3-ff01c9a96254" class="">Complex domains have a rich relational structure, which can be represented as a relational graph.</p><p id="1b9bef7d-10ea-4622-ad44-72c2d26e9061" class="">
+</p><p id="a6cbb201-a7d7-43e3-84d7-756c6db88660" class=""><em><strong>为什么图深度学习难？难点在哪里？</strong></em></p><p id="0f8f021c-75d2-445c-a78c-73446e0a3362" class=""><strong>Networks are complex.</strong></p><figure id="62d609bf-9e92-4450-b92f-61f22452435a" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/graphdeeplearninghard.png"><img style="width:787px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/graphdeeplearninghard.png"/></a></figure><ul id="368bef9a-5840-496f-847c-f8c6b98ee193" class="bulleted-list"><li style="list-style-type:disc">Arbitrary size and complex topological structure(复杂的拓扑结构) (i.e, no spatial locality like grids)</li></ul><ul id="e3340cac-0013-4cc0-a7a4-aada71d8e01f" class="bulleted-list"><li style="list-style-type:disc">No fixed node ordering or reference point</li></ul><ul id="0703ca7a-8e6e-4ac1-ad66-676b7c6119d9" class="bulleted-list"><li style="list-style-type:disc">Often dynamic and have multimodal features</li></ul><p id="1195a740-a05b-48f3-b17d-9af6af748946" class="">
+</p><p id="d847bd02-cc95-4a9e-84c8-97899265aca0" class=""><em><strong>Definition</strong></em> A heterogeneous graph is defined as </p><figure id="bc63f89a-7a34-4885-bf5f-dcdcddfa5213" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>G</mi><mo>=</mo><mo stretchy="false">(</mo><mi>V</mi><mo separator="true">,</mo><mi>E</mi><mo separator="true">,</mo><mi>R</mi><mo separator="true">,</mo><mi>T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G = (V,E,R,T)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mclose">)</span></span></span></span></span></div></figure><ul id="b1fddb0c-f0f4-4dbf-8bfd-0e16616e5be2" class="bulleted-list"><li style="list-style-type:disc">Nodes with node types <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mi>i</mi></msub><mo>∈</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">v_i \in V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="cfd5696d-070a-496c-ae7d-ae7d97253522" class="bulleted-list"><li style="list-style-type:disc">Edges with relation types <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo separator="true">,</mo><mi>r</mi><mo separator="true">,</mo><msub><mi>v</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">(v_i,r,v_j) \in E</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="67da6296-e568-468e-b70d-7d521b6072a3" class="bulleted-list"><li style="list-style-type:disc">Node type <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><msub><mi>v</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(v_i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="1495fe94-4462-4d32-80a7-a2d7836064ad" class="bulleted-list"><li style="list-style-type:disc">Relation type <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>r</mi><mo>∈</mo><mi>R</mi></mrow><annotation encoding="application/x-tex">r \in R</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="6e9c2ff3-5eae-4fcb-94e3-1a7fcacdb6f6" class="bulleted-list"><li style="list-style-type:disc">Nodes and edges have attributes/features</li></ul><p id="480070c4-93b5-4423-80fe-64ce1f08295a" class="">
+</p><p id="5f24c63d-3069-4b73-a04b-10a7088b0f14" class=""><em><strong>Heterogeneous Graphs(异构图)</strong></em></p><figure id="0d026931-d534-4490-92c4-6465293a0c79" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/yigoutu.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/yigoutu.png"/></a></figure><p id="ee4dd481-aca3-4b86-83a8-734c64b0fc12" class="">
+</p><p id="c8dadb2c-10da-4c93-a571-b7d2b7e668d4" class=""><em><strong>有向图和无向图 Directed vs. Undirected Graphs</strong></em></p><p id="2fe64906-8760-4be9-a681-3caaed6a6a8c" class=""><em>Undirected</em></p><figure id="9e7ef946-51cf-4f4a-826e-2f8a742a9029" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/wuxianggtu.png"><img style="width:354px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/wuxianggtu.png"/></a></figure><ul id="aec7f797-0bda-4611-9037-f0ef4f7a42ce" class="bulleted-list"><li style="list-style-type:disc">Links: undirected (symmetrical, reciprocal)</li></ul><p id="62f634a5-3b41-4215-8510-c2d16e321de0" class=""><em>Directed</em></p><figure id="97a069ed-01a7-4a04-b43b-284ea21d9c74" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/yoouxiangtu.png"><img style="width:317px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/yoouxiangtu.png"/></a></figure><ul id="972903f3-fca2-44c5-a2ee-b45832d653e6" class="bulleted-list"><li style="list-style-type:disc">Links: directed</li></ul><p id="ca415767-8520-4c91-99f8-6331bf0f244a" class="">其他相关因素: Weights, Types, Properties, Attributes</p><p id="eb0eb14b-7ddf-444d-985b-55eb2def6479" class="">
+</p><p id="58fcfa9b-4cbd-4276-a606-e3b8cfa460fa" class=""><em><strong>二分图 Bipartite Graph</strong></em></p><figure id="eedcb1d9-3781-4ac9-97c9-469789bf7b61" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/erfenntu.png"><img style="width:247px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/erfenntu.png"/></a></figure><ul id="4c262a74-99b9-4e34-812e-d77a25e72aae" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-teal">Bipartite graph</mark></strong> is a graph whose nodes can be divided into two disjoint sets <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span></span></span></span></span><span>﻿</span></span> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span><span>﻿</span></span> such that every link connects a node in <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span></span></span></span></span><span>﻿</span></span> to one in <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span><span>﻿</span></span>; that is, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>U</mi></mrow><annotation encoding="application/x-tex">U</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">U</span></span></span></span></span><span>﻿</span></span> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span><span>﻿</span></span> are <strong>independent sets.</strong></li></ul><ul id="de466b57-ff3d-43f0-a851-78976a3ea25f" class="bulleted-list"><li style="list-style-type:disc">Examples<ul id="ec909274-b04f-43f7-9a56-63b74b5288a6" class="bulleted-list"><li style="list-style-type:circle">Authors-to-Papers (they authored)</li></ul><ul id="085e22d1-66cc-4563-b0a2-6ead1da42fac" class="bulleted-list"><li style="list-style-type:circle">Actors-to-Movies (they appeared in)</li></ul><ul id="3049ab06-6a2d-49d0-8225-ccc81dc8f179" class="bulleted-list"><li style="list-style-type:circle">Users-to-Movies (they rated)</li></ul><ul id="61f6f54e-2d6b-4d85-9974-c8aa68cdbe8c" class="bulleted-list"><li style="list-style-type:circle">Recipes-to-Ingredients (they contain)</li></ul></li></ul><ul id="1ef3b2b2-52c0-4066-89a5-fc76d1af8c12" class="bulleted-list"><li style="list-style-type:disc">“Folded” networks<ul id="8e4da3e5-f2eb-46a2-bd84-518f4e54fce7" class="bulleted-list"><li style="list-style-type:circle">Author collaboration networks</li></ul><ul id="2b7dbd67-241a-41ab-a59b-3f0dce462c3d" class="bulleted-list"><li style="list-style-type:circle">Movie co-rating networks</li></ul></li></ul><p id="c9d55ee5-cf0d-44d3-af14-18bcc34d7f06" class="">
+</p><p id="7f586b2c-e091-45cd-8821-df3304c51591" class=""><em><strong>Graph Machine Learning Tasks</strong></em></p><figure id="3802158c-8680-439c-8ce4-0092c3a1a77c" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/tasks.png"><img style="width:787px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/tasks.png"/></a></figure><ul id="43909811-83b6-44b7-9c74-04702e10977b" class="bulleted-list"><li style="list-style-type:disc">Graph-level prediction, Graph generation</li></ul><ul id="4264fd54-814e-465e-b078-2bdbdda45b53" class="bulleted-list"><li style="list-style-type:disc">Node level</li></ul><ul id="6e97344d-034a-469e-a708-7cc6e89dec7c" class="bulleted-list"><li style="list-style-type:disc">Community (subgraph) level</li></ul><ul id="df72b081-0f21-4bdc-afd4-e65ce9276e94" class="bulleted-list"><li style="list-style-type:disc">Edge level</li></ul><p id="e50cfbee-df96-4eee-b66b-dff85ed87d9c" class="">
+</p><h1 id="665826b0-92f5-47bf-a94e-a5d586ca9f86" class="">Graph Machine Learning Tasks</h1><h2 id="f2c1d90c-6d35-4e6c-917f-918f502b1c3e" class="">Node-Level Tasks</h2><p id="d8c40626-2ad6-473a-afaa-2674c721fcfd" class=""><strong><em>Node classification Example</em></strong></p><figure id="06a3ed44-7721-4c87-ac9c-d3d45173fdb4" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/nodelclassificattion.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/nodelclassificattion.png"/></a></figure><p id="cbea909a-20ff-48fa-b4cb-1743af8998ca" class="">
+</p><p id="0113995f-80bb-446d-b3d7-ee909de22716" class=""><em><strong>Node-Level Network Structure</strong></em></p><p id="11c5b266-5357-4576-8c6a-9d8d19bdbaf7" class=""><mark class="highlight-red">Goal:</mark> Characterize the structure and position of a node in the network<div class="indented"><ul id="d93184a1-9896-43af-bbc4-dd1939c44279" class="bulleted-list"><li style="list-style-type:disc">Node degree (节点度)</li></ul><ul id="06cb67ae-b546-4ef7-8e96-4f930e2ddfb9" class="bulleted-list"><li style="list-style-type:disc">Node importance &amp; position (重要性和位置)<ul id="f4d6d605-0be0-4e93-83d1-d9b412094d8c" class="bulleted-list"><li style="list-style-type:circle">Number of shortest paths passing through a node</li></ul><ul id="abd90ea5-608a-48ca-aabd-570989cd3087" class="bulleted-list"><li style="list-style-type:circle">Avg. shortest path length to other nodes</li></ul></li></ul><ul id="2e746dd1-2b9f-4d6b-9217-74978a10ee03" class="bulleted-list"><li style="list-style-type:disc">Substructures around the node (节点的周围的结构)</li></ul></div></p><p id="754c34b3-0081-4c9d-91b9-a879be751a1f" class="">
+</p><p id="5525dc73-0068-4a4c-8730-2082018788e1" class=""><em><strong>Node’s Subgraphs: Graphlets (图基元, 类似于同一种形状的子图的数量)</strong></em></p><p id="431a521b-5e40-4b3b-8d55-7cdaee66554b" class="">Graphlets are defined as small induced subgraphs of a large network that appear at any frequency.</p><p id="cee72bb0-87eb-41da-b2c2-82d8f6860eb7" class="">Graphlets: A count vector of rooted subgraphs at a given node.</p><figure id="b2148b98-4712-42d9-821f-337877108607" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled.png"><img style="width:628px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled.png"/></a></figure><p id="21845fde-637e-4e35-8276-62e6160c4e12" class="">我们可以看到节点<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span></span><span>﻿</span></span>, 整个图<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span></span></span></span></span><span>﻿</span></span>, 所有的graphlets 的形状如右侧的3个小图。</p><p id="b8f75bc8-f596-4461-b284-5621d307162b" class="">So, Graphlets instances of node <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span></span><span>﻿</span></span>:</p><figure id="8b34b61b-965b-4708-a411-4a52386e097f" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%201.png"><img style="width:450px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%201.png"/></a></figure><p id="f3ae5613-cca5-4024-8f07-f08b7eccc7f9" class="">Graphlets of node <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>u</mi></mrow><annotation encoding="application/x-tex">u</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">u</span></span></span></span></span><span>﻿</span></span>:</p><figure id="14f885d5-3d8a-47cc-9b5a-2e03f72f9b78" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mi>a</mi><mo separator="true">,</mo><mi>b</mi><mo separator="true">,</mo><mi>c</mi><mo separator="true">,</mo><mi>d</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo stretchy="false">[</mo><mn>2</mn><mo separator="true">,</mo><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>2</mn><mo stretchy="false">]</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{align*}
+&amp;a,b,c,d\\
+&amp;[2,1,0,2]
+\end{align*}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.75em;"><span style="top:-3.75em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:2.84em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.75em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">d</span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mopen">[</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">]</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.25em;"><span></span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="3c4500f9-2615-45a6-b3e4-ee09ecc84337" class="">
+</p><p id="560d04db-d344-4a63-bd5e-a9a11b023340" class=""><em><strong>Example: AlphaFold-Solving Protein Folding</strong></em></p><figure id="078375af-74d9-49bb-8b41-af2b38d5cc32" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%202.png"><img style="width:616px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%202.png"/></a></figure><p id="c29343d0-5a79-41c6-88d3-87cb74acef36" class="">Key idea: “Spatial graph”<div class="indented"><ul id="baff0402-db99-4534-a022-3e26f31ad48b" class="bulleted-list"><li style="list-style-type:disc">Nodes: Amino acids in a protein sequence</li></ul><ul id="f63c8ea9-94f2-423b-8ee9-b136bffcb5ea" class="bulleted-list"><li style="list-style-type:disc">Edges: Proximity between amino acids (residues)</li></ul></div></p><h2 id="c42f5c2c-5332-4466-8c53-e82acd6aa3f5" class="">Link-Level Prediction Task</h2><p id="2a8702df-21ab-476a-8677-e08c45e5b369" class=""><em><strong>Link-level prediction task example</strong></em></p><figure id="3187d633-8771-4d09-86ce-ca318e816188" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%203.png"><img style="width:560px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%203.png"/></a></figure><ul id="d1064b49-d030-4290-be2c-a6829567ebf9" class="bulleted-list"><li style="list-style-type:disc">The task is to predict new/missing/unknown links based on the existing links.</li></ul><ul id="24350938-1c87-447a-8e9b-925bc4cb8863" class="bulleted-list"><li style="list-style-type:disc">At test time, node pairs (with no existing links) are ranked, and top <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span></span><span>﻿</span></span> node pairs are predicted.</li></ul><ul id="06b9759f-4c72-46b3-9c83-394e3ed12a07" class="bulleted-list"><li style="list-style-type:disc"><strong>Task: Make a prediction for a pair of nodes.</strong></li></ul><p id="783f8e8b-dd03-4374-bbbe-b3fc6b025797" class="">
+</p><p id="8cd8899c-8b98-40c9-8ecf-ec457a32c24f" class=""><em><strong>图的边预测 (Link Prediction as a Task)</strong></em></p><p id="15a63d68-9d23-4571-9e28-8320ac1d0ed5" class="">Two formulations of the link prediction task:<div class="indented"><ol type="1" id="ceee3d54-8102-4e75-9048-a2fd0ce1e747" class="numbered-list" start="1"><li>Links missing at random:<p id="0527ace5-a0f9-435a-bcc6-a203d664c8bb" class="">Remove a random set of links and then aim to predict them</p></li></ol><ol type="1" id="52ab2ec5-dc49-45c4-923f-03366d00dca1" class="numbered-list" start="2"><li>Links over time:<p id="4aa60e46-c90a-4a8d-87eb-9141fa77ad7e" class="">Given <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo stretchy="false">[</mo><msub><mi>t</mi><mn>0</mn></msub><mo separator="true">,</mo><msubsup><mi>t</mi><mn>0</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">G[t_0,t&#x27;_0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0019em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span> a graph defined by edges up to time <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mi>t</mi><mn>0</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup></mrow><annotation encoding="application/x-tex">t&#x27;_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.2481em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>, output a ranked list <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> of edges (not in <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo stretchy="false">[</mo><msub><mi>t</mi><mn>0</mn></msub><mo separator="true">,</mo><msubsup><mi>t</mi><mn>0</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">G[t_0,t&#x27;_0]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0019em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span>) that are predicted to appear in time <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mo stretchy="false">[</mo><msub><mi>t</mi><mn>1</mn></msub><mo separator="true">,</mo><msubsup><mi>t</mi><mn>1</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">G[t_1,t&#x27;_1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0019em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></p><figure id="bbd2ad71-84bc-40d0-b405-1fa0612d8c2b" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%204.png"><img style="width:169px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%204.png"/></a></figure><p id="c1b43764-f6f0-43a3-aa21-b802dd478fca" class=""><mark class="highlight-teal">Evaluation:</mark><div class="indented"><ul id="844015bd-d86a-4e93-a285-05692ef6a19a" class="bulleted-list"><li style="list-style-type:disc"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi mathvariant="normal">∣</mi><msub><mi>E</mi><mrow><mi>n</mi><mi>e</mi><mi>w</mi></mrow></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">n = |E_{new}|</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">e</span><span class="mord mathnormal mtight" style="margin-right:0.02691em;">w</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span></span><span>﻿</span></span>: # new edges that appear during the test period <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><msub><mi>t</mi><mn>1</mn></msub><mo separator="true">,</mo><msubsup><mi>t</mi><mn>1</mn><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[t_1,t&#x27;_1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0019em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-2.4519em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2481em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="6809a996-af31-4c05-8f61-c1efcef5d318" class="bulleted-list"><li style="list-style-type:disc">Take top <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span></span><span>﻿</span></span> elements of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">L</span></span></span></span></span><span>﻿</span></span> and count correct edges</li></ul></div></p></li></ol><p id="ef3dd3c7-421b-4d40-9a0b-c986bd88fc42" class=""><strong>Example 1: Recommender Systems</strong></p><figure id="a6d6aaa9-f6bf-45e3-9a95-3f08a6730732" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%205.png"><img style="width:757px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%205.png"/></a></figure><ul id="139c2f97-c9a3-450a-9532-6b83bf2a4664" class="bulleted-list"><li style="list-style-type:disc">Users interacts with items<ul id="202335e2-71a1-44e4-8acd-6ef02215b93a" class="bulleted-list"><li style="list-style-type:circle">Watch movies, buy merchandise, listen to music</li></ul><ul id="ab9bff7d-ef19-4434-ace4-d2062d49a508" class="bulleted-list"><li style="list-style-type:circle">Nodes: Users and items</li></ul><ul id="373bb1d2-1c8e-4092-98de-fc465ad69a35" class="bulleted-list"><li style="list-style-type:circle">Edges: User-item interactions</li></ul></li></ul><ul id="c04f5999-d489-4500-ae8c-f4e2a159c537" class="bulleted-list"><li style="list-style-type:disc"><strong>Goal</strong>: Recommend items users might like</li></ul><p id="49b91e71-b743-4442-8e37-4f73b02647b5" class="">
+</p><p id="01bf63e6-f392-4c4c-ada1-23a76dbdc06a" class=""><strong>Example 2: Biomedical Graph Link Prediction</strong></p><p id="8c0cbecd-4fad-434d-a13f-05063abf9362" class="">Query: How likely will Simvastatin and Ciprofloxacin, when taken together, break down muscle tissue?</p><figure id="6bed67d1-9b16-4af2-89ad-c648f1bd35bf" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%206.png"><img style="width:554px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%206.png"/></a></figure><figure id="10058b9a-3f95-4e00-925c-ac47f264deef" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%207.png"><img style="width:309px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%207.png"/></a></figure><ul id="27bab127-2e46-424c-8a85-4c3a3a519506" class="bulleted-list"><li style="list-style-type:disc">Nodes: Drugs &amp; Proteins</li></ul><ul id="4c17f4eb-a559-4d01-ae01-3348d1bbfbb8" class="bulleted-list"><li style="list-style-type:disc">Edges: Interaction</li></ul></div></p><h2 id="91d08c13-1690-4607-b605-b44441e9c0f5" class="">Graph-Level Tasks</h2><p id="fcc4014b-defb-4be4-ad6d-fb68f4ef3695" class=""><em><strong>Graph-Level Features</strong></em></p><p id="8664c32a-9828-4aa9-923a-a6fec3dd7645" class=""><strong>Goal:</strong> We want make a prediction for an entire graph or a subgraph of the graph.</p><p id="ae96b2d5-fa0c-4923-a754-bd350f66ab08" class=""><em><strong>Example: </strong></em><em><strong><a href="https://deepmind.google/discover/blog/traffic-prediction-with-advanced-graph-neural-networks/">Road Network as a Graph</a></strong></em></p><figure id="b2f68959-7d46-4e4e-9bdf-b945b78bc749" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%208.png"><img style="width:688px" src="CS224W-Machine%20Learning%20with%20Graph-Introduction%204b6028d594d64374a5427a8501553014/Untitled%208.png"/></a></figure><ul id="322147c3-326f-4f48-8da1-c9a7c52969ec" class="bulleted-list"><li style="list-style-type:disc">Nodes: Road segments</li></ul><ul id="1bff02bd-1de4-45a2-a411-afcef2997a79" class="bulleted-list"><li style="list-style-type:disc">Edges: Connectivity between road segments</li></ul><ul id="6a808a5d-9d13-44db-adc2-7c57fbd31a2b" class="bulleted-list"><li style="list-style-type:disc">Prediction: Time of Arrival (ETA)</li></ul><p id="a386e9a3-6d4b-4420-9d47-0ce751d256d5" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
