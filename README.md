@@ -26,7 +26,7 @@
 - ALADS-Lecture-10
 - ALADS-Lecture-11
 - ALADS-Lecture-12
-## CS224W Machine Learning with Graph \url{https://web.stanford.edu/class/cs224w/}
+## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction:
 - Lecture 2 
 Hint: Other related material in other repository.
