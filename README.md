@@ -28,7 +28,7 @@
 - ALADS-Lecture-12
 ## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
-- Lecture 2
+- Lecture 2 Node Embeddings: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/2node/2NodeEmbeddings.html
 
 ## Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
