@@ -7,8 +7,8 @@
 - RL-Lecture-5 Model-free Prediction:
 - RL-Lecture-6 Control Theory + Project:
 - RL-Lecture-7 Model Based RL: 
-- RL-Lecture-8
-- RL-Lecture-9
+- RL-Lecture-8 Function Approximiation: 
+- RL-Lecture-9 Policy Gradients I: 
 - RL-Lecture-10
 - RL-Lecture-11
 - RL-Lecture-12
@@ -29,6 +29,11 @@
 ## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
 - Lecture 2 Node Embeddings: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/2node/2NodeEmbeddings.html
+- Lecture 3
+- Lecture 4
+- Lecture 5
+- Lecture 6
+- Lecture 7
 
 ## Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
