@@ -29,7 +29,7 @@
 ## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
 - Lecture 2 Node Embeddings: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/2node/2NodeEmbeddings.html
-- Lecture 3
+- Lecture 3 GNN1: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/3gnn1/3gnn1.html
 - Lecture 4
 - Lecture 5
 - Lecture 6
