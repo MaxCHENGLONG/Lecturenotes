@@ -21,8 +21,8 @@
 - ALADS-Lecture-5 Gaussian Elimination(LU Factorization): https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/5/ALADS-GE+LU.html
 - ALADS-Lecture-6 Cholesky Decomposition: 
 - ALADS-Lecture-7 QR Decomposition: 
-- ALADS-Lecture-8
-- ALADS-Lecture-9
+- ALADS-Lecture-8 Skip: Maybe QR-Decomposition?
+- ALADS-Lecture-9 Regression Analysis: 
 - ALADS-Lecture-10
 - ALADS-Lecture-11
 - ALADS-Lecture-12
