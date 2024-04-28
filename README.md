@@ -9,8 +9,8 @@
 - RL-Lecture-7 Model Based RL: 
 - RL-Lecture-8 Function Approximiation: 
 - RL-Lecture-9 Policy Gradients I: 
-- RL-Lecture-10
-- RL-Lecture-11
+- RL-Lecture-10 Policy Gradients II:
+- RL-Lecture-11 Exploration: 
 - RL-Lecture-12
 - RL-Lecture-13
 ## Applied Linear Algebra for Data Science:
@@ -26,6 +26,8 @@
 - ALADS-Lecture-10
 - ALADS-Lecture-11
 - ALADS-Lecture-12
+- ALADS-Lecture-13
+- ALADS-Lecture-14
 ## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
 - Lecture 2 Node Embeddings: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/2node/2NodeEmbeddings.html
