@@ -4,13 +4,13 @@
 - RL-Lecture-2 Markove Decision Process: https://maxchenglong.github.io/Lecturenotes/RL-Lecturenotes/2/RL-MDP.html
 - RL-Lecture-3 Dynamic Programming: https://maxchenglong.github.io/Lecturenotes/RL-Lecturenotes/3/RL-DP.html
 - RL-Lecture-4 Model-free Prediction: https://maxchenglong.github.io/Lecturenotes/RL-Lecturenotes/4/RL-Model-free-prediction.html
-- RL-Lecture-5 Model-free Prediction:
+- RL-Lecture-5 Model-free Control:
 - RL-Lecture-6 Control Theory + Project:
 - RL-Lecture-7 Model Based RL: 
 - RL-Lecture-8 Function Approximiation: 
 - RL-Lecture-9 Policy Gradients I: 
-- RL-Lecture-10
-- RL-Lecture-11
+- RL-Lecture-10 Policy Gradients II:
+- RL-Lecture-11 Exploration: 
 - RL-Lecture-12
 - RL-Lecture-13
 ## Applied Linear Algebra for Data Science:
@@ -26,6 +26,8 @@
 - ALADS-Lecture-10
 - ALADS-Lecture-11
 - ALADS-Lecture-12
+- ALADS-Lecture-13
+- ALADS-Lecture-14
 ## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
 - Lecture 2 Node Embeddings: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/2node/2NodeEmbeddings.html
