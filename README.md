@@ -4,7 +4,7 @@
 - RL-Lecture-2 Markove Decision Process: https://maxchenglong.github.io/Lecturenotes/RL-Lecturenotes/2/RL-MDP.html
 - RL-Lecture-3 Dynamic Programming: https://maxchenglong.github.io/Lecturenotes/RL-Lecturenotes/3/RL-DP.html
 - RL-Lecture-4 Model-free Prediction: https://maxchenglong.github.io/Lecturenotes/RL-Lecturenotes/4/RL-Model-free-prediction.html
-- RL-Lecture-5 Model-free Prediction:
+- RL-Lecture-5 Model-free Control:
 - RL-Lecture-6 Control Theory + Project:
 - RL-Lecture-7 Model Based RL: 
 - RL-Lecture-8 Function Approximiation: 
