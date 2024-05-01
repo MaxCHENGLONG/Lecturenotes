@@ -36,6 +36,18 @@
 - Lecture 5 GNN3: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/5gnn3/5gnn3.html
 - Lecture 6
 - Lecture 7
+- Lecture 8
+- Lecture 9
+- Lecture 10
+- Lecture 11
+- Lecture 12
+- Lecture 13
+- Lecture 14
+- Lecture 15
+- Lecture 16
+- Lecture 17
+- Lecture 18
+- Lecture 19
 
 ## Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
