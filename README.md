@@ -34,7 +34,7 @@
 - Lecture 3 GNN1: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/3gnn1/3gnn1.html
 - Lecture 4 GNN2: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/4gnn2/4gnn2.html
 - Lecture 5 GNN3: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/5gnn3/5gnn3.html
-- Lecture 6
+- Lecture 6 Theory: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/6theory/6theory.html
 - Lecture 7
 - Lecture 8
 - Lecture 9
