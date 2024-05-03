@@ -1,0 +1,724 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS224W-Machine Learning with Graph-Theory</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="85070e78-5ca6-4d35-b7ae-38278614fed1" class="page sans"><header><h1 class="page-title">CS224W-Machine Learning with Graph-Theory</h1><p class="page-description"></p></header><div class="page-body"><p id="f8f02397-705e-4836-b010-eef32d25db0c" class=""><em><strong>How powerful are GNNs?</strong></em></p><ul id="77ca40ce-96ee-470d-84b0-16a461c7dc63" class="bulleted-list"><li style="list-style-type:disc">Many GNN models have been proposed</li></ul><ul id="93e540e9-bd06-443f-93d8-a148c5273b74" class="bulleted-list"><li style="list-style-type:disc">What is the expressive power(ability to distinguish different graph structures) of these GNN models?</li></ul><ul id="e1c9dcf0-13e1-466b-8d62-16e01f3d5a01" class="bulleted-list"><li style="list-style-type:disc">How to design a maximally expressive GNN model?</li></ul><p id="600b998c-5cb5-4124-aa64-b36837055915" class="">
+</p><figure id="51ee14e5-1bc3-451c-9e48-f4ead051ce15" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>A single GNN layer</mtext></mrow><annotation encoding="application/x-tex">\text{A single GNN layer}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">A single GNN layer</span></span></span></span></span></span></div></figure><ul id="2f463c94-5752-4ce9-b21c-77a621f7f4ba" class="bulleted-list"><li style="list-style-type:disc">We focus on message passing GNNs:<ul id="f3e8224b-2c8a-4c60-acfd-90a7b0c5138b" class="bulleted-list"><li style="list-style-type:circle">Message : each node computes a message</li></ul><figure id="acd7420c-4418-452e-b3f2-63446fd25b06" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mtext mathvariant="bold">m</mtext><mi>u</mi><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><msup><mtext>MSG</mtext><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></msup><mrow><mo fence="true">(</mo><msubsup><mtext mathvariant="bold">h</mtext><mi>u</mi><mrow><mo stretchy="false">(</mo><mi>l</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup><mo separator="true">,</mo><mi>u</mi><mo>∈</mo><mo stretchy="false">{</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo>∪</mo><mi>v</mi><mo stretchy="false">}</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textbf{m}_u^{(l)} = \text{MSG}^{(l)}\left( \textbf{h}_u^{(l-1)},u\in \{N(v)\cup v\}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.185em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">m</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-2.453em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="mord"><span class="mord text"><span class="mord">MSG</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9612em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mord text"><span class="mord textbf">h</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9723em;"><span style="top:-2.453em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span><span style="top:-3.1473em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mopen">{</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">}</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></span></div></figure><ul id="10848763-b1d7-4e8e-a06f-9384c3eb5409" class="bulleted-list"><li style="list-style-type:circle">Aggregation: aggregate messages from neighbors</li></ul><figure id="8a670baf-31ae-4e61-81d9-a1978ce537c9" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msubsup><mtext mathvariant="bold">h</mtext><mi>v</mi><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><msup><mtext>AGG</mtext><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></msup><mrow><mo fence="true">(</mo><mo stretchy="false">{</mo><msubsup><mtext mathvariant="bold">m</mtext><mi>u</mi><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></msubsup><mo separator="true">,</mo><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">}</mo><mo separator="true">,</mo><msubsup><mtext mathvariant="bold">m</mtext><mi>v</mi><mrow><mo stretchy="false">(</mo><mi>l</mi><mo stretchy="false">)</mo></mrow></msubsup><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\textbf{h}_v^{(l)} = \text{AGG}^{(l)} \left( \{ \textbf{m}_u^{(l)},u \in N(v)\},\textbf{m}_v^{(l)}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2193em;vertical-align:-0.247em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">h</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9723em;"><span style="top:-2.453em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span><span style="top:-3.1473em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="mord"><span class="mord text"><span class="mord">AGG</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9612em;"><span style="top:-3.1362em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mopen">{</span><span class="mord"><span class="mord text"><span class="mord textbf">m</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-2.453em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">u</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)}</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord textbf">m</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-2.453em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></span></div></figure><figure id="f0e09c32-85bb-4283-8211-932f466e9c09" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled.png"><img style="width:364px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled.png"/></a></figure></li></ul><p id="36948636-746d-4f8c-adae-b358f7311fe6" class="">
+</p><ul id="348020c8-3c67-4e18-a729-a946b9b19c85" class="bulleted-list"><li style="list-style-type:disc">Many GNN Models<ul id="5e305dd4-4274-46d0-91bb-dd91f8d03b5e" class="bulleted-list"><li style="list-style-type:circle">Many GNN Models have been proposed:<ul id="1f082954-5594-4824-a35f-eecb8b6d6f3c" class="bulleted-list"><li style="list-style-type:square">GCN, GraphSAGE, GAT, Design Space etc.</li></ul><figure id="70824dbe-24ee-4913-acd0-cb97d5f5105b" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%201.png"><img style="width:652px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%201.png"/></a></figure></li></ul><ul id="3a221ac0-46eb-4da0-bf79-c4f99fc8ccdf" class="bulleted-list"><li style="list-style-type:circle">Example (GNN Model Example)<ul id="b5cc7b0c-a34b-4ba7-a5fe-b2c5772e038d" class="bulleted-list"><li style="list-style-type:square">GCN (mean-pool) : Element-wise mean pooling + Linear + ReLUU non-linearity</li></ul><figure id="143dad37-3d14-419c-9c7b-badcfbfa15b5" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%202.png"><img style="width:652px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%202.png"/></a></figure><ul id="07a2f1af-b1ac-4002-b7e7-ddb5fae515f1" class="bulleted-list"><li style="list-style-type:square">GraphSAGE (max-pool) : MLP + element-wise max-pooling</li></ul><figure id="1f9774d6-7333-4ea8-b42f-c126627ceb60" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%203.png"><img style="width:908px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%203.png"/></a></figure><p id="0254ec11-e863-431f-9a51-8e5058b4efcd" class="">
+</p></li></ul></li></ul><p id="573ca842-dc5b-4229-9176-422110fbc6c6" class="">Node Colors (节点染色)</p><p id="4e1d32d5-cf0e-4e91-a81e-f37d330052f4" class="">We use node same/different colors to represent nodes with same/different features. (相同的颜色代表相同的特征或者说相同的意义，用颜色区分不同的feature)</p><figure id="2ae30552-2d58-4fe9-87fa-7ab1491eb349" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%204.png"><img style="width:358px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%204.png"/></a></figure><p id="3b372eb3-b241-468b-bdce-2f249f6c89d1" class="">
+</p><p id="278ecf17-f2f7-42ea-a764-7e7c177293b2" class="">Local Neighborhood Structures</p><p id="f07b19b5-3c02-429a-8863-e8a43e9f92b0" class="">We specifically consider local neighborhood structures around each node in a graph.</p><ul id="7318a0b2-3622-4b09-93cd-4e9fd5abc85b" class="bulleted-list"><li style="list-style-type:disc">Example: Nodes 1 and 5 have different neighborhood structures because they have different node degrees.</li></ul><figure id="5e4c30db-7b81-430f-8e5c-f8e0794064d2" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%205.png"><img style="width:374px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%205.png"/></a></figure><ul id="ef8eec6d-d28b-4ec1-a290-7685ccc986e2" class="bulleted-list"><li style="list-style-type:disc">Example: Nodes 1 and 4 both have the same node degree of 2. However, they still have different neighborhood structures because their neighbors have different node degrees.</li></ul><figure id="0c8757b1-c911-40d8-8d11-5a40703c321d" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%206.png"><img style="width:364px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%206.png"/></a></figure><ul id="3e99bb83-facf-4589-8daf-8c9c03160f14" class="bulleted-list"><li style="list-style-type:disc">Example: Nodes 1 and 2 have the same neighborhood structure because they are symmetric within the graph.</li></ul><figure id="843b93b6-5d98-4d90-a15b-63c5ddb09a72" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%207.png"><img style="width:361px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%207.png"/></a></figure><p id="5d10cd28-9806-4488-8588-d3759373e424" class="">
+</p><p id="61ee7224-18a5-41c2-9cb8-fb306eba41b8" class=""><em><strong>We need to understand how a GNN captures local neighborhood structures. (Computational Graph)</strong></em></p><figure id="41371723-84da-4b43-b901-b2066311c7b2" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Computational Graph</mtext></mrow><annotation encoding="application/x-tex">\text{Computational Graph}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Computational Graph</span></span></span></span></span></span></div></figure><ul id="aa9a2520-1490-4341-948d-7e0e078cc00d" class="bulleted-list"><li style="list-style-type:disc">In each layer, a GNN aggregate neighboring node embeddings.</li></ul><ul id="1e4071d7-ed32-477f-832e-0a2f2efd1e9c" class="bulleted-list"><li style="list-style-type:disc">A GNN generates node embeddings through a computational graph defined by the neighborhood.<ul id="66972de4-8f14-428f-a08e-5f9e9b971e06" class="bulleted-list"><li style="list-style-type:circle">Example: Node 1’s computational graph (2-layer GNN)</li></ul><figure id="cbdd95fe-56cd-43e2-9d76-6c735b384e0a" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%208.png"><img style="width:680px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%208.png"/></a></figure><ul id="7174bf56-7d4b-48d1-bd09-80dbf193a34d" class="bulleted-list"><li style="list-style-type:circle">Example: Nodes 1 and 2’s computational graphs. <em>But GNN only sees node features (not IDs)</em></li></ul><figure id="bb08b0ea-1b68-487e-a457-3e4c68a0bed1" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%209.png"><img style="width:916px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%209.png"/></a></figure><figure id="bc92b604-06d0-4a9b-a25b-d7008b4325c0" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2010.png"><img style="width:897px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2010.png"/></a></figure></li></ul><ul id="6046a048-48fe-4a8f-a19d-47039aa73f41" class="bulleted-list"><li style="list-style-type:disc">A GNN will generate the same embedding for nodes 1 and 2 because:<ul id="f5a44ac3-f062-4c07-a97a-460978a9021a" class="bulleted-list"><li style="list-style-type:circle">Computational graphs are the same</li></ul><ul id="75c4654d-3be9-4f13-a956-76e74a5337cd" class="bulleted-list"><li style="list-style-type:circle">Node features (colors) are identical</li></ul></li></ul><p id="6b792c91-a45b-4fe4-8344-19abd6523a45" class=""><em>GNN won’t be able to distinguish nodes 1 and 2</em></p><figure id="b150b715-23b8-4ddf-addd-e8ea0ebbb00d" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2011.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2011.png"/></a></figure><p id="76d98d00-2e57-40b6-a6c0-7b9c24bf065f" class=""><em>Note: GNN does not care about node ids, it just aggregates features vectors of different nodes.</em></p><p id="105769f4-f0d6-4c8f-9012-2ef8ff4cc11a" class="">
+</p><p id="29e5ed93-6efe-49ce-b245-b2bef49bed68" class="">In general, different local neighborhoods define different computational graphs.</p><figure id="326fda8c-00c2-49a6-b62d-52bf48081279" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2012.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2012.png"/></a></figure><p id="92568c78-b177-4f58-9ffa-23880bc0367b" class="">Computational graphs are identical to rooted subtree structures around each node.</p><figure id="7e2857bd-77da-486a-9758-04ade389a03c" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2013.png"><img style="width:923px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2013.png"/></a></figure><p id="e759a3f3-8962-4ac6-a5ee-04cf0c9ddeaf" class="">
+</p><ul id="a4f21da2-0d84-4d96-981c-7ecbdd68dba9" class="bulleted-list"><li style="list-style-type:disc">GNN’s node embeddings capture rooted subtree strucutrues.</li></ul><ul id="4928a2f5-e40e-42c4-917a-45fa5cc093f4" class="bulleted-list"><li style="list-style-type:disc">Most expressive GNN maps different rooted subtrees into different node embeddings (represented by different colors).</li></ul><figure id="a39e7a65-7e76-4171-becc-a4f466b59058" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2014.png"><img style="width:917px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2014.png"/></a></figure><p id="2870792d-594f-4141-ad92-8a527eef5284" class="">
+</p><figure id="5a83e620-1faf-4366-a022-1c90425f408c" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Recall: Injective Function</mtext></mrow><annotation encoding="application/x-tex">\text{Recall: Injective Function}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Recall: Injective Function</span></span></span></span></span></span></div></figure><ul id="71719928-46ba-452e-8f4c-414abc41b2c0" class="bulleted-list"><li style="list-style-type:disc">Function <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></span><span>﻿</span></span>: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X \rightarrow Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">Y</span></span></span></span></span><span>﻿</span></span> is injective if it maps different elements into different outputs.</li></ul><ul id="eaf59e1b-a4e4-44e0-b36b-c249ccb0debf" class="bulleted-list"><li style="list-style-type:disc">Intuition: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></span><span>﻿</span></span> retains all the information about input.</li></ul><figure id="ebab3ffe-ed5f-4609-b4f1-7b4b48def305" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2015.png"><img style="width:542px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2015.png"/></a></figure><p id="54af9045-985b-4b84-a309-1880740e8767" class="">
+</p><p id="d96b2d7c-6abb-48ac-b53d-ee9271c352fb" class=""><em><strong>How Expressive is a GNN?</strong></em></p><ul id="bd27f507-3450-4e82-a4d6-93e01f8af945" class="bulleted-list"><li style="list-style-type:disc">Most expressive GNN should map subtrees to the node embeddings injectively.</li></ul><figure id="7411a3c1-a673-4a4c-9020-eb79218a4c32" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2016.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2016.png"/></a></figure><p id="9018a988-8f7b-4aa0-84b2-58d4025fd1c8" class="">Key observation: Subtrees of the same depth can be recursively characterized from the leaf nodes to the root nodes.</p><figure id="b0954cff-2795-45f9-87f1-fde9378031a1" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2017.png"><img style="width:941px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2017.png"/></a></figure><ul id="e5a15fcc-455c-4b41-831c-24e9a239828a" class="bulleted-list"><li style="list-style-type:disc">If each step of GNN’s aggregation can fully retain the neighboring information, the generated node embeddings can distinguish different rooted subtrees.</li></ul><figure id="23eaf158-08a8-463c-a33b-6641cfd178aa" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2018.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2018.png"/></a></figure><ul id="35bba4ff-763b-4ab4-91c7-16417f54d397" class="bulleted-list"><li style="list-style-type:disc">In other words, most expressive GNN would use an injective neighbor aggregation function at each step.<ul id="d4f0d979-1964-4731-8208-b1223e4fe895" class="bulleted-list"><li style="list-style-type:circle">Maps different neighbors to different embeddings.</li></ul></li></ul><figure id="8c7f6591-776b-4514-a377-d6bd176c699d" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2019.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2019.png"/></a></figure><ul id="2fc252ab-d9d9-422d-b3e4-bf8b879a476b" class="bulleted-list"><li style="list-style-type:disc">Summary so far<ul id="1415374a-4424-4e83-b699-8b3d81bbc752" class="bulleted-list"><li style="list-style-type:circle">To generate a node embedding, GNNs use a computational graph corresponding to a subtree rooted around each node.</li></ul><ul id="9733c7a2-90cb-48fd-a002-91af11047586" class="bulleted-list"><li style="list-style-type:circle">GNN can fully distingguish different subtree structures if every step of its neighbor aggregation is injective.</li></ul></li></ul><figure id="37217f37-9be4-47df-860a-0380dbb6c04d" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2020.png"><img style="width:854px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2020.png"/></a></figure><p id="fffe1d1a-2df4-4a8a-afc2-375bc046479f" class="">
+</p><p id="89591b57-11d0-40de-b3c8-5436201529e7" class=""><span style="border-bottom:0.05em solid"><strong>Expressive Power of GNNs</strong></span></p><p id="93320baa-93b2-4365-a405-5f6b5d0f24b3" class="">Key observation: Expressive power of GNNs can be characterized by that of neighbor aggregation functions they use.<div class="indented"><ul id="1b098bbd-9cb1-4acc-8bb8-63cfeecef9a9" class="bulleted-list"><li style="list-style-type:disc">A more expressive aggregation function leads to a more expressive GNN.</li></ul><ul id="2dcb0a02-976a-44e8-9a5a-875fe8ad298a" class="bulleted-list"><li style="list-style-type:disc">Injective aggregation function leads to the most expressive GNN</li></ul><p id="f21cc406-ce1d-41e8-8874-b785cbcde2d4" class="">
+</p></div></p><p id="70821841-3009-40a3-9b4c-4b4516a49912" class=""><em><strong>Theoretically analyze expressive power of aggregation functions</strong></em></p><ul id="9299921f-3244-4b96-8d69-1b7c9f3b34d5" class="bulleted-list"><li style="list-style-type:disc">Observation: Neighbor aggregation can be abstracted as a function over a multi-set (a set with repeating elements)</li></ul><figure id="2c5e4110-7e88-4c5f-b7fc-ecce3d8ca0e8" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2021.png"><img style="width:635px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2021.png"/></a></figure><p id="c4baee8e-995c-4b51-85a8-4809d3bd638f" class=""><em><strong>We analyze aggregation functions of two popular GNN models</strong></em></p><ul id="66a3947d-0301-4426-a87c-eee02e4eca13" class="bulleted-list"><li style="list-style-type:disc">GCN (mean-pool)<ul id="c27d39c7-3ae3-4028-a00a-f5004d21ff77" class="bulleted-list"><li style="list-style-type:circle">Uses element-wise mean pooling over neighboring node features</li></ul><figure id="9b38c380-e129-48b9-a31f-d3c03eecef94" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Mean</mtext><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>x</mi><mi>u</mi></msub><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{Mean} (\{ x_u\}_{u \in N(v)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1052em;vertical-align:-0.3552em;"></span><span class="mord text"><span class="mord">Mean</span></span><span class="mopen">({</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure></li></ul><ul id="b1ab070a-dd20-4fee-8fb9-1c5b92f0dc08" class="bulleted-list"><li style="list-style-type:disc">GraphSAGE (max-pool)<ul id="377fbc5d-99f2-4752-be1c-6ddfd5b15146" class="bulleted-list"><li style="list-style-type:circle">Uses element-wise max pooling over neighboring node features</li></ul><figure id="8822b487-46ea-40fa-91f5-c1f33322b4e0" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Max</mtext><mo stretchy="false">(</mo><mo stretchy="false">{</mo><msub><mi>x</mi><mi>u</mi></msub><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{Max}(\{x_u\}_{u \in N(v)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1052em;vertical-align:-0.3552em;"></span><span class="mord text"><span class="mord">Max</span></span><span class="mopen">({</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">u</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure></li></ul><p id="2bd7ea07-3cdc-4200-8ff9-aba212a92389" class="">
+</p><p id="4c7857c7-2c44-443a-b619-90d8c387d6a2" class=""><em><strong>Neighbor Aggregation: Case Study</strong></em></p><ul id="75200162-d7bc-4eb4-8f20-021a5fa84b97" class="bulleted-list"><li style="list-style-type:disc">GCN (mean-pool)<ul id="5c5f60fc-21e3-4453-8026-b378829b5035" class="bulleted-list"><li style="list-style-type:circle">Take element-wise mean, followed by linear function and ReLU activation, i.e., <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">max(0,x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">ma</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></li></ul><ul id="3088b2b9-7f8c-460f-bc71-0c790127c6cf" class="bulleted-list"><li style="list-style-type:circle">Theorem<ul id="845a7801-05ff-4462-85be-8a86b9a5ecc9" class="bulleted-list"><li style="list-style-type:square">GCN’s aggregation function cannot distinguish different multi-sets with the same color proportion.</li></ul><figure id="e6211a9e-0f3e-4fc8-9e19-7129a00c9043" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2022.png"><img style="width:652px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2022.png"/></a></figure></li></ul><p id="5f420921-29db-4183-a752-c184821a8df5" class=""><em><strong>解释上面的理论，为什么会出现这个问题</strong></em></p><ul id="a6e34066-11a7-4b60-a063-6cf080679a58" class="bulleted-list"><li style="list-style-type:circle">For simplicity, we assume node features (colors) are represented by one-hot encoding.<ul id="6247440a-bdf0-42bb-9a9c-44647b0b43b1" class="bulleted-list"><li style="list-style-type:square">Example: If there are two distinct colors: </li></ul><figure id="3b76fbec-6216-400e-a351-2d69d8cf0628" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2023.png"><img style="width:502px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2023.png"/></a></figure><ul id="8595d368-9e8b-47ab-9d8e-a57f00fb59f4" class="bulleted-list"><li style="list-style-type:square">This assumption is sufficient to illustrate how GCN fails.</li></ul><ul id="73d8c733-6d18-4208-b064-d1c74f0a8483" class="bulleted-list"><li style="list-style-type:square">Failure case illustration</li></ul><figure id="9a71becf-64ff-4122-a6a7-c4c4989b6cf5" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2024.png"><img style="width:652px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2024.png"/></a></figure></li></ul><p id="a5a8aee5-a4c2-4b84-8264-85932ff9718c" class="">
+</p></li></ul><ul id="a4c1a878-0a0e-4633-b557-3b441f7fbd2c" class="bulleted-list"><li style="list-style-type:disc">GraphSAGE (max-pool)<ul id="fbb32a26-d5f3-4074-b271-907000fbc6b3" class="bulleted-list"><li style="list-style-type:circle">Apply an MLP, then take element-wise max.</li></ul><ul id="0bee6bf3-290c-49b2-aa4f-3e25bf034e1a" class="bulleted-list"><li style="list-style-type:circle">Theorem<ul id="308490da-c92b-4bf9-bfce-9e1420613ca7" class="bulleted-list"><li style="list-style-type:square">GraphSAGE’s aggregation function cannot distinguish different multi-sets with the same set of distinct colors.</li></ul><figure id="c0fa885f-f70d-4c3b-835b-9144b568d170" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2025.png"><img style="width:816px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2025.png"/></a></figure></li></ul><p id="cdbb7b77-5ef2-4920-b32f-190fd9bf0926" class=""><em><strong>解释一下出现这种情况的原因</strong></em><div class="indented"><ul id="3e4f4f8b-1076-481d-a6d3-71c989c33d48" class="bulleted-list"><li style="list-style-type:disc">Failure case illustration</li></ul><figure id="1cb7810c-c167-4c95-8bad-a86279bdf087" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2026.png"><img style="width:656px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2026.png"/></a></figure><p id="87e4b5d9-0fd8-448c-8429-22ddc56023f2" class="">
+</p><p id="80f4ea7a-320c-419d-829c-271e478c618d" class="">
+</p></div></p></li></ul><p id="57e9bbbf-df24-410f-b713-269273f8f64d" class="">Summary GCN 和 GraphSAGE的问题</p><ul id="b2baaf2a-49b3-403d-b6a1-c7e6d2fedcde" class="bulleted-list"><li style="list-style-type:disc">Expressive power of GNNs can be characterized by that of the neighbor aggregation function</li></ul><ul id="e29b800f-717a-4876-a07d-e790dd0b1c66" class="bulleted-list"><li style="list-style-type:disc">Neighbor aggregation is a function over multi-sets (sets with repeating elements)</li></ul><ul id="68736eb0-cf42-4018-b5ac-012b46f2ffc6" class="bulleted-list"><li style="list-style-type:disc">GCN and GraphSAGE’s aggregation functions fail to distinguish some basic multi-sets; hence not injective.</li></ul><ul id="dfc6e54c-6d9b-4366-98cd-c8ec38169262" class="bulleted-list"><li style="list-style-type:disc">Therefore, GCN and GraphSAGE are not maximally powerful GNNs.</li></ul><p id="6d416ebe-60c2-4654-88d9-613b95367c07" class="">
+</p><p id="e29d135b-de6a-4528-98a9-02c67732dec4" class="">
+</p><p id="7903fc72-1f78-4a17-bd7b-aac63b6535aa" class=""><strong><em>Designing Most Expressive GNNs</em></strong></p><ul id="465d4fa3-b27a-4310-968f-6640c69f9e94" class="bulleted-list"><li style="list-style-type:disc">Our goal: Design maximally powerful GNNs in the class of message-passing GNNs.</li></ul><ul id="ddb2a2eb-e61c-480c-96be-a9d64e226a7c" class="bulleted-list"><li style="list-style-type:disc">This can be achieved by designing injective neighbor aggregation function over multi-sets.</li></ul><ul id="e4561246-acc5-42de-8220-d37530f3d089" class="bulleted-list"><li style="list-style-type:disc">Here, we design a neural network that can model injective multiset function.</li></ul><p id="bf93bb87-d0c5-4cc8-bdee-d96f604c6e5a" class="">
+</p><p id="1d37bfdd-ac95-4109-b28e-7640d693fc5d" class="">
+</p><p id="870f6501-aaf4-44c7-9b71-921aff93d0f2" class=""><strong>Injective Multi-Set Function</strong></p><ul id="8437de34-5588-4771-879d-f4cec15963c0" class="bulleted-list"><li style="list-style-type:disc">Theorem: Any injective multi-set function can be expressed as: </li></ul><figure id="f3436dab-8077-4295-9b5d-81399be6a083" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2027.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2027.png"/></a></figure><ul id="c42a7ea7-f561-430e-86d7-6e0318391bcb" class="bulleted-list"><li style="list-style-type:disc">Proof Intuition: <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></span><span>﻿</span></span> produces one-hot encodings of colors. Summation of the one-hot encodings retains all the information about the input multi-set. <figure id="43b1c612-7fc6-4355-8a1f-ef77ca1684a0" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Φ</mi><mrow><mo fence="true">(</mo><munder><mo>∑</mo><mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow></munder><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Phi \left( \sum_{x \in S}f(x) \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0717em;vertical-align:-1.3217em;"></span><span class="mord">Φ</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8557em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3217em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></div></figure></li></ul><figure id="a91b2d87-01d3-4bfd-9942-9d5e3cdd3c71" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2028.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2028.png"/></a></figure><p id="23dfc1cf-3b76-4495-8727-0aada8d5b7e8" class="">
+</p><p id="26b786a5-8ac3-4e55-90ab-3ba92ea1aa1c" class="">
+</p><p id="94c9dd63-857a-4ea1-8dde-1358b22bc3e7" class=""><em><strong>Universal Approximation Theorem</strong></em></p><ul id="8364265a-b979-4d81-87ca-cf9ddcdb0ce2" class="bulleted-list"><li style="list-style-type:disc">How to model <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Φ</span></span></span></span></span><span>﻿</span></span> and <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span></span><span>﻿</span></span> in <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><msub><mo>∑</mo><mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow></msub><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Phi (\sum_{x\in S} f(x))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0771em;vertical-align:-0.3271em;"></span><span class="mord">Φ</span><span class="mopen">(</span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1786em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3271em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">))</span></span></span></span></span><span>﻿</span></span>?</li></ul><ul id="8e2aa002-f996-4073-9263-f36fdbaf6b15" class="bulleted-list"><li style="list-style-type:disc">We use a Multi-Layer Perceptron (MLP).</li></ul><ul id="b543714c-2e3a-4185-a7d7-67ad17f7c280" class="bulleted-list"><li style="list-style-type:disc">Theorem: Universal Approximation Theorem<ul id="67579316-2e9f-4ceb-be03-d305d3086c98" class="bulleted-list"><li style="list-style-type:circle">1-hidden-layer MLP with sufficiently-large hidden dimensionality and appropriate non-linearity <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo stretchy="false">(</mo><mo>⋅</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sigma(\cdot)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord">⋅</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> (including ReLU and sigmoid) can approximate any continuous function to an arbitrary accuracy.</li></ul><figure id="678c139e-6cde-4b9f-bd0d-a4d039d25ec7" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2029.png"><img style="width:601px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2029.png"/></a></figure><p id="4446ca6f-211b-4012-86e4-70ba2396f83b" class="">
+</p><p id="737c2251-71d8-43e0-9642-fb61fafee126" class="">
+</p></li></ul><p id="e46150ff-61d4-41e9-914e-fc92bdd29e7d" class="">Injective Multi-Set Function</p><ul id="38808f43-0dd2-4c97-89f4-e9cb25006e12" class="bulleted-list"><li style="list-style-type:disc">We have arrived at a neural network that can model any injective multi-set function.</li></ul><figure id="ab43913e-c059-4db2-af4f-2cd2397de2c1" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mtext>MLP</mtext><mi mathvariant="normal">Φ</mi></msub><mrow><mo fence="true">(</mo><munder><mo>∑</mo><mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mtext>MLP</mtext><mi>f</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{MLP}_{\Phi} \left( \sum_{x\in S} \text{MLP}_{f}(x)\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0717em;vertical-align:-1.3217em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Φ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8557em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3217em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></div></figure><p id="d2ab49c6-441e-4f05-8156-e732d51905ca" class="">
+</p><figure id="7e19ae9b-d200-4750-b51f-4df0988bc8cd" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Most Expressive GNN</mtext></mrow><annotation encoding="application/x-tex">\text{Most Expressive GNN}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Most Expressive GNN</span></span></span></span></span></span></div></figure><p id="922eb811-1a6f-4a9c-a64f-b97525ae6db4" class="">Graph Isomorphism Network (GIN)</p><ul id="49ce2f39-cb4f-45c3-a3a2-701ceaf12f3f" class="bulleted-list"><li style="list-style-type:disc">Apply an MLP, element-wise sum, followed by another MLP.</li></ul><figure id="53410be6-366d-44bd-9837-3c2aaecdcda8" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mtext>MLP</mtext><mi mathvariant="normal">Φ</mi></msub><mrow><mo fence="true">(</mo><munder><mo>∑</mo><mrow><mi>x</mi><mo>∈</mo><mi>S</mi></mrow></munder><msub><mtext>MLP</mtext><mi>f</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{MLP}_{\Phi} \left( \sum_{x\in S} \text{MLP}_{f}(x)\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0717em;vertical-align:-1.3217em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Φ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">(</span></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.8557em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.3217em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size4">)</span></span></span></span></span></span></span></div></figure><ul id="14dec986-37da-4160-a76b-6e35ec7d8c83" class="bulleted-list"><li style="list-style-type:disc">Theorem<ul id="9fcc9693-ee23-442d-a67e-a711b61aea4e" class="bulleted-list"><li style="list-style-type:circle">GIN’s neighbor aggregation function is injective.</li></ul></li></ul><ul id="8fdc051b-b478-4a4f-9ec4-a33d65beb126" class="bulleted-list"><li style="list-style-type:disc">No failure cases!</li></ul><ul id="b83e77fc-28f7-4be6-9187-c95e2d664cee" class="bulleted-list"><li style="list-style-type:disc">GIN is the most expressive GNN in the class of message-passing GNNs we have introduced!</li></ul><p id="c63115b2-d6ca-4818-88e7-d1c0cc20d2a5" class="">
+</p><p id="9a2e4e10-fe62-44b9-99ac-ee9365a93c6a" class="">We now describe the full model of GIN by relating it to WL graph kernel (traditional way of obtaining graph-level features).</p><p id="a137da3a-e81a-482f-b35a-63db4a7f25e8" class=""><em>Recall: Color refinement algorithm in WL kernel.</em></p><ul id="46fa30f3-8766-41b1-9cc6-a4371e200404" class="bulleted-list"><li style="list-style-type:disc">Given: A graph <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span></span></span></span></span><span>﻿</span></span> with a set of nodes <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span><span>﻿</span></span>.<ul id="59fbf913-3dff-4b5a-b515-ce7bf9542e36" class="bulleted-list"><li style="list-style-type:circle">Assign an initial color <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^{(0)}(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">0</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> to each node <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span>.</li></ul><ul id="be5744b4-088a-4165-a8a1-1a976bdcf531" class="bulleted-list"><li style="list-style-type:circle">Iteratively refine node colors by </li></ul><figure id="ac9ea530-8445-4040-b7b0-d0283bd78e58" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>HASH</mtext><mrow><mo fence="true">(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">c^{(k+1)}(v) = \text{HASH} \left( c^{(k)}(v),\{c^{(k)}(u)\}_{u \in N(v)}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="mord text"><span class="mord">HASH</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></span></div></figure><p id="b9480903-85e0-417e-b78d-d826574ff72d" class="">where HASH maps different inputs to different colors.</p><ul id="f6bc9bd5-132d-4e94-9e8b-7ffba0893f44" class="bulleted-list"><li style="list-style-type:circle">After <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span></span><span>﻿</span></span> steps of color refinement, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^{(K)}(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> summarizes the structure of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>−</mo><mi>h</mi><mi>o</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">K-hop</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">h</span><span class="mord mathnormal">o</span><span class="mord mathnormal">p</span></span></span></span></span><span>﻿</span></span> neighborhood</li></ul><p id="3430b6f2-9eb1-4085-aa4c-e90a7f8acf8e" class="">
+</p></li></ul><figure id="8d9e7ea1-073d-4d00-b5dd-a1c055c6e1c6" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Color Refinement Algorithm</mtext></mrow><annotation encoding="application/x-tex">\text{Color Refinement Algorithm}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Color Refinement Algorithm</span></span></span></span></span></span></div></figure><p id="3bc99765-bc33-4da8-86b7-954f0d26c304" class="">Example of color refinement given two graphs</p><ul id="d9695d2f-79cf-4bf1-8f03-8c056aff5723" class="bulleted-list"><li style="list-style-type:disc">Assign initial colors</li></ul><figure id="5d02cf30-3b2c-491a-a753-1f83851435c6" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2030.png"><img style="width:667px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2030.png"/></a></figure><ul id="63be6713-6e17-41c5-b5db-93c71140f2dc" class="bulleted-list"><li style="list-style-type:disc">Aggregate neighboring colors</li></ul><figure id="49f4eb99-bfd7-4593-93f1-83bf78031084" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2031.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2031.png"/></a></figure><p id="bc6e5a42-509a-49e3-b37c-9d385ee73779" class="">逗号后面1的个数就是这个节点相连接的节点（个数）</p><ul id="6b8a5741-7f35-47fd-9959-3107f3b191e3" class="bulleted-list"><li style="list-style-type:disc">Aggregated colors</li></ul><figure id="9e13e3f2-38b4-4fe4-9be1-f34222214111" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2032.png"><img style="width:708px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2032.png"/></a></figure><ul id="053ecf14-4a17-4662-9734-4f036361f672" class="bulleted-list"><li style="list-style-type:disc">Injectively HASH the aggregated colors</li></ul><figure id="705a1d3f-15c0-409d-a439-dd8a80166d01" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2033.png"><img style="width:283px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2033.png"/></a></figure><figure id="9f2c6e07-5ff5-4398-a792-d0e2402c00d3" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2034.png"><img style="width:523px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2034.png"/></a></figure><ul id="b10ad065-08b7-4c31-9f00-af28344fc4a7" class="bulleted-list"><li style="list-style-type:disc">Process continues until a stable coloring is reached</li></ul><ul id="d4a2034e-2218-4899-bb99-ee95f4d8f983" class="bulleted-list"><li style="list-style-type:disc">Two graphs are considered isomorphic if they have the same set of colors.</li></ul><figure id="2326191f-8c4e-471a-9074-a0d72383bad9" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2035.png"><img style="width:796px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2035.png"/></a></figure><p id="71e72129-47bd-4658-beea-da27dfdd4f81" class="">
+</p><p id="822975f4-adcb-46f4-a8bc-53bf6cd824ad" class="">
+</p><figure id="3e547b03-49d8-453a-be44-ec95a3398228" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>The Complete GIN Model</mtext></mrow><annotation encoding="application/x-tex">\text{The Complete GIN Model}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">The Complete GIN Model</span></span></span></span></span></span></div></figure><ul id="4adce8be-ce05-4f6f-92d6-19f48e26e3df" class="bulleted-list"><li style="list-style-type:disc">GIN uses a neural network to model the injective HASH function. </li></ul><figure id="4792b6cd-b05c-4e16-84ee-453b4176aad4" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>HASH</mtext><mrow><mo fence="true">(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">c^{(k+1)}(v) = \text{HASH} \left( c^{(k)}(v),\{c^{(k)}(u)\}_{u\in N(v)}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="mord text"><span class="mord">HASH</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></span></div></figure><ul id="59430798-85aa-4a1d-a92a-2cada85fc2bf" class="bulleted-list"><li style="list-style-type:disc">Specifically, we will model the injective function over the tuple: <ul id="84cb070d-b2cf-4215-885e-e2f3a57bf3a6" class="bulleted-list"><li style="list-style-type:circle"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^{(k)}(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>: Root node features</li></ul><ul id="b884b4e5-69b1-4880-ae2f-8bcee2047049" class="bulleted-list"><li style="list-style-type:circle"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><msub><mo stretchy="false">)</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub></mrow><annotation encoding="application/x-tex">c^{(k)}(u)_{u \in N(v)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2432em;vertical-align:-0.3552em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>: Neighboring node colors</li></ul></li></ul><figure id="7d4b37ac-7135-47b9-aefa-5a95501cbcf0" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c^{(k)}(v), \{c^{(k)}(u)\}_{u \in N(v)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2932em;vertical-align:-0.3552em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure><ul id="7014ac3b-6d5e-4c76-83b4-433c371f5dfa" class="bulleted-list"><li style="list-style-type:disc">Theorem: Any injective function over the tuple <figure id="92c55537-f8ff-42bb-93d8-52d5a33c2853" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(c^{(k)}(v), \{c^{(k)}(u)\}_{u \in N(v)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.2932em;vertical-align:-0.3552em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></div></figure></li></ul><p id="07fc8329-a1d3-4695-a494-611ee3f36901" class="">can be modeled as</p><figure id="ae8ecf33-33df-429d-8f76-8af2ca6a671b" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mtext>MLP</mtext><mi mathvariant="normal">Φ</mi></msub><mrow><mo fence="true">(</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>ϵ</mi><mo stretchy="false">)</mo><mo>⋅</mo><msub><mtext>MLP</mtext><mi>f</mi></msub><mo stretchy="false">(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>+</mo><munder><mo>∑</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></munder><msub><mtext>MLP</mtext><mi>f</mi></msub><mo stretchy="false">(</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\text{MLP}_{\Phi}\left((1+\epsilon) \cdot \text{MLP}_f (c^{(k)}(v)) + \sum_{u \in N(v)} \text{MLP}_f(c^{(k)}(u))\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.6em;vertical-align:-1.55em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Φ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.875em;height:3.600em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.875em' height='3.600em' viewBox='0 0 875 3600'><path d='M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1
+c-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,
+-36,557 l0,84c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,
+949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9
+c0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,
+-544.7,-112.5,-882c-2,-104,-3,-167,-3,-189
+l0,-92c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,
+-210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">ϵ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">))</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.05em;"><span style="top:-1.809em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3.05em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.516em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord text"><span class="mord">MLP</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">))</span><span class="mclose"><span class="delimsizing mult"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.05em;"><span style="top:-4.05em;"><span class="pstrut" style="height:5.6em;"></span><span style="width:0.875em;height:3.600em;"><svg xmlns="http://www.w3.org/2000/svg" width='0.875em' height='3.600em' viewBox='0 0 875 3600'><path d='M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,
+63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5
+c11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0,9
+c-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664
+c-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11
+c0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17
+c242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558
+l0,-144c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,
+-470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.55em;"><span></span></span></span></span></span></span></span></span></span></span></span></div></figure><p id="0216421e-e4d7-4b1e-9724-133a0492482f" class="">where <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϵ</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">ϵ</span></span></span></span></span><span>﻿</span></span> is a learnable scalar.</p><ul id="8c01804f-09d1-4d6d-827e-8416437c8c58" class="bulleted-list"><li style="list-style-type:disc">If input feature <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^{(0)}(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">0</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> is represented as one-hot, direct summation is injective.</li></ul><figure id="972acdc1-4735-437d-b3e7-60e2af86ae6f" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2036.png"><img style="width:780px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2036.png"/></a></figure><ul id="84beb743-8ab6-4829-85ff-6505b6d2d080" class="bulleted-list"><li style="list-style-type:disc">We only need <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord">Φ</span></span></span></span></span><span>﻿</span></span> to ensure the injectivity.</li></ul><figure id="530dcb81-a12e-481a-aba7-84042517c67b" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2037.png"><img style="width:912px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2037.png"/></a></figure><ul id="d02544b3-3be0-4b30-a9d6-8b6a375e9e8f" class="bulleted-list"><li style="list-style-type:disc">GIN’s node embedding updates</li></ul><ul id="f0f493f9-f450-46b2-83fd-14b98950e2c0" class="bulleted-list"><li style="list-style-type:disc">Given: A graph <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span></span></span></span></span><span>﻿</span></span> with a set of nodes <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>V</mi></mrow><annotation encoding="application/x-tex">V</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.22222em;">V</span></span></span></span></span><span>﻿</span></span>.<ul id="010675bb-cc26-45fe-8074-ef511f720ab2" class="bulleted-list"><li style="list-style-type:circle">Assign an initial vector <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^{(0)}(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight">0</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> to each node <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi></mrow><annotation encoding="application/x-tex">v</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span></span><span>﻿</span></span>.</li></ul><ul id="e595be65-97ff-40f5-ada9-a8e9e7a6aa40" class="bulleted-list"><li style="list-style-type:circle">Iteratively update node vectors by </li></ul><figure id="d6583f91-427f-438e-ac23-50b3732b62da" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo>=</mo><mtext>GINConv</mtext><mrow><mo fence="true">(</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mo stretchy="false">{</mo><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>k</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>u</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">}</mo><mrow><mi>u</mi><mo>∈</mo><mi>N</mi><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow></msub><mo stretchy="false">}</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">c^{(k+1)}(v) = \text{GINConv}\left(\{c^{(k)}(v),\{c^{(k)}(u)\}_{u\in N(v)}\}\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.188em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.8em;vertical-align:-0.65em;"></span><span class="mord text"><span class="mord">GINConv</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.938em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">u</span><span class="mclose">)</span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.5198em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">u</span><span class="mrel mtight">∈</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.03588em;">v</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3552em;"><span></span></span></span></span></span></span><span class="mclose">}</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span></span></span></span></span></div></figure><p id="b2f2fc65-ee91-448a-a661-8fabd140c99c" class="">where GINConv maps different inputs to different embeddings.</p><ul id="6f3efabc-d79b-4742-8fb7-475ef7458ff9" class="bulleted-list"><li style="list-style-type:circle">After <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span></span><span>﻿</span></span> steps of GIN iterations, <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mrow><mo stretchy="false">(</mo><mi>K</mi><mo stretchy="false">)</mo></mrow></msup><mo stretchy="false">(</mo><mi>v</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">c^{(K)}(v)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.138em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">c</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathnormal mtight" style="margin-right:0.07153em;">K</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span> summarizes the structure of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span></span></span></span></span><span>﻿</span></span>-hop neighborhood.</li></ul></li></ul><p id="363fc941-9058-4967-968d-5092321f6d02" class="">
+</p><figure id="0521a5b0-da47-433e-947c-4e4c71b43254" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>GIN vs WL Graph Kernel</mtext></mrow><annotation encoding="application/x-tex">\text{GIN vs WL Graph Kernel}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">GIN vs WL Graph Kernel</span></span></span></span></span></span></div></figure><p id="290db08f-b531-4505-bb96-ffdb285baf1a" class="">GIN can be understood as differentiable neural version of the WL graph Kernel:</p><table id="6309b0c8-ed3a-410b-8ff4-ff03b350e63c" class="simple-table"><tbody><tr id="c9478576-667e-4014-a4c7-ade6d8051e96"><td id="h|Xp" class="" style="width:128.265625px"></td><td id="ySOl" class="" style="width:255.421875px">Update target</td><td id="CX;{" class="">Update function</td></tr><tr id="5020e18e-dac6-4f6b-8be7-1c21c320171e"><td id="h|Xp" class="" style="width:128.265625px">WL Graph Kernel</td><td id="ySOl" class="" style="width:255.421875px">Node colors (one-hot)</td><td id="CX;{" class="">HASH</td></tr><tr id="d45b60a3-5c5a-4b4e-8090-ad53a26f9d78"><td id="h|Xp" class="" style="width:128.265625px">GIN</td><td id="ySOl" class="" style="width:255.421875px">Node embeddings (low-dim vectors)</td><td id="CX;{" class="">GINConv</td></tr></tbody></table><p id="5476e7a7-a4d1-45e3-b07e-75e3a2c371fe" class="">Advantages of GIN over the WL graph kernel are:</p><ul id="6676d78c-d6f8-4f8a-a5ff-504785032479" class="bulleted-list"><li style="list-style-type:disc">Node embeddings are low-dimensional; hence, they can capture the fine-grained similarity of different nodes.</li></ul><ul id="a65f10dd-289f-4549-a011-60825c3bff76" class="bulleted-list"><li style="list-style-type:disc">Parameters of the update function can be learned for the downstream tasks.</li></ul><p id="3d1b45fb-22d5-491e-902c-41e563423e43" class="">
+</p><p id="115b006e-97d2-4248-ac0c-a63cf74ceaf0" class="">Because of the relation between GIN and the WL graph kernel, their expressive is exactly the same.</p><ul id="246f0d52-3e80-4521-9c93-c1fdcc8adb57" class="bulleted-list"><li style="list-style-type:disc">If two graphs can be distinguished by GIN, they can be also distinguished by the WL kernel, and vice versa.</li></ul><p id="0d010ff5-a36c-4ec3-919c-334741a6c983" class="">
+</p><p id="a242dc35-52bf-4f00-893c-7676dc859740" class="">How powerful is this?</p><ul id="0cfe86bd-8b5c-4532-b019-797e9e651dd0" class="bulleted-list"><li style="list-style-type:disc">WL kernel has been both theoretically and empirically shown to distinguish most of the real-world graphs.</li></ul><ul id="1aa9a86d-0d4a-4505-9e29-8077d0112548" class="bulleted-list"><li style="list-style-type:disc">Hence, GIN is also powerful enough to distinguish most of the real graphs</li></ul><p id="192c9f2d-ff8a-4acf-bcfa-6cae7aa84675" class="">
+</p><p id="65dccf17-c49a-440e-9a74-375af6eb5373" class=""><strong><em>Improving GNNs’ Power</em></strong></p><p id="10fea17b-6efd-4d5c-89ef-1bd386aa1659" class="">Can the expressive power of GNNs be improved?</p><ul id="faded920-731b-4736-961c-9df97e128f0a" class="bulleted-list"><li style="list-style-type:disc">There are basic graph structures that existing GNN framework cannot distinguish, such as difference in cycles.<figure id="0e2e85a3-7d3d-4fd9-87ec-28c13174c2a9" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2038.png"><img style="width:467px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2038.png"/></a></figure></li></ul><figure id="e69cb05f-0b27-48e1-8c99-8c0ebc1be1f6" class="image"><a href="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2039.png"><img style="width:343px" src="CS224W-Machine%20Learning%20with%20Graph-Theory%2085070e785ca64d35b7ae38278614fed1/Untitled%2039.png"/></a></figure><ul id="c52121cf-b97c-4a02-8666-39ab49d112bc" class="bulleted-list"><li style="list-style-type:disc">GNNs’ expressive power can be improved to resolve the above problem.</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
