@@ -11,8 +11,7 @@
 - RL-Lecture-9 Policy Gradients I: 
 - RL-Lecture-10 Policy Gradients II:
 - RL-Lecture-11 Exploration: 
-- RL-Lecture-12
-- RL-Lecture-13
+- RL-Lecture-12 Conclusion:
 ## Applied Linear Algebra for Data Science:
 - ALADS-Lecture-1 Introduction + Background Knowledge: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/1/ALADS-Introduction.html
 - ALADS-Lecture-2 The four Fundamental subspace: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/2/ALADS-FFS.html
