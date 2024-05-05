@@ -23,7 +23,7 @@
 - ALADS-Lecture-8 Skip: Maybe QR-Decomposition? https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/8/ALADS-Skip.html
 - ALADS-Lecture-9 Regression Analysis: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/9/ALADS-RA.html
 - ALADS-Lecture-10 SVD: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/10/ALADS-SVD.html
-- ALADS-Lecture-11
+- ALADS-Lecture-11 SVD2: https://maxchenglong.github.io/Lecturenotes/ALADS-Lecturenotes/11/ALADS-SVD2.html
 - ALADS-Lecture-12
 - ALADS-Lecture-13
 - ALADS-Lecture-14
