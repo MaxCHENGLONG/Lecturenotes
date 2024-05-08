@@ -35,7 +35,7 @@
 - Lecture 5 GNN3: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/5gnn3/5gnn3.html
 - Lecture 6 Theory: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/6theory/6theory.html
 - Lecture 7 Heterogeneous: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/7herero/7hetero.html
-- Lecture 8
+- Lecture 8 Knowledge Graph: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/8kg/8kg.html
 - Lecture 9
 - Lecture 10
 - Lecture 11
