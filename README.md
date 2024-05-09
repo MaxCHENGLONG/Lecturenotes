@@ -30,23 +30,23 @@
 ## CS224W Machine Learning with Graph https://web.stanford.edu/class/cs224w/
 - Lecture 1 Introduction: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/1intro/1introduction.html
 - Lecture 2 Node Embeddings: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/2node/2NodeEmbeddings.html
-- Lecture 3 GNN1: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/3gnn1/3gnn1.html
-- Lecture 4 GNN2: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/4gnn2/4gnn2.html
-- Lecture 5 GNN3: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/5gnn3/5gnn3.html
-- Lecture 6 Theory: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/6theory/6theory.html
-- Lecture 7 Heterogeneous: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/7herero/7hetero.html
-- Lecture 8 Knowledge Graph: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/8kg/8kg.html
-- Lecture 9
-- Lecture 10
-- Lecture 11
-- Lecture 12
-- Lecture 13
-- Lecture 14
-- Lecture 15
-- Lecture 16
-- Lecture 17
-- Lecture 18
-- Lecture 19
+- Lecture 3 Graph Neural Networks: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/3gnn1/3gnn1.html
+- Lecture 4 A General Perspective on GNNs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/4gnn2/4gnn2.html
+- Lecture 5 GNN Augmentation and Training: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/5gnn3/5gnn3.html
+- Lecture 6 Theory of Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/6theory/6theory.html
+- Lecture 7 Heterogeneous Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/7herero/7hetero.html
+- Lecture 8 Knowledge Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/8kg/8kg.html
+- Lecture 9 Reasoning over Knowledge Graphs:
+- Lecture 10 Fast Neural Subgraph Matching:
+- Lecture 11 GNNs for Recommenders:
+- Lecture 12 Deep Generative Models for Graphs:
+- Lecture 13 Advanced Topics in GNNs:
+- Lecture 14 Graph Transformers:
+- Lecture 15 Scaling to Large Graphs:
+- Lecture 16 SNAP Lectures:
+- Lecture 17 Link Prediction and Causality:
+- Lecture 18 Algorithmic Reasoning with Graphs: 
+- Lecture 19 Conclusion: 
 
 ## Hint: Other related material in other repository.
 - Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
