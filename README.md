@@ -37,7 +37,7 @@
 - Lecture 7 Heterogeneous Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/7herero/7hetero.html
 - Lecture 8 Knowledge Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/8kg/8kg.html
 - Lecture 9 Reasoning over Knowledge Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/9reasoning/9reasoning.html
-- Lecture 10 Fast Neural Subgraph Matching:
+- Lecture 10 Fast Neural Subgraph Matching: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/10motifs/10motifs.html
 - Lecture 11 GNNs for Recommenders:
 - Lecture 12 Deep Generative Models for Graphs:
 - Lecture 13 Advanced Topics in GNNs:
