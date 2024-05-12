@@ -39,7 +39,7 @@
 - Lecture 9 Reasoning over Knowledge Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/9reasoning/9reasoning.html
 - Lecture 10 Fast Neural Subgraph Matching: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/10motifs/10motifs.html
 - Lecture 11 GNNs for Recommenders: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/11recsys/11recsys.html
-- Lecture 12 Deep Generative Models for Graphs:
+- Lecture 12 Deep Generative Models for Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/12deepgeneration/12deepgeneration.html
 - Lecture 13 Advanced Topics in GNNs:
 - Lecture 14 Graph Transformers:
 - Lecture 15 Scaling to Large Graphs:
