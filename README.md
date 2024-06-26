@@ -13,7 +13,7 @@
 - Lecture 11 GNNs for Recommenders: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/11recsys/11recsys.html
 - Lecture 12 Deep Generative Models for Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/12deepgeneration/12deepgeneration.html
 - Lecture 13 Advanced Topics in GNNs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/13advancedtopics/13advancedtopics.html
-- Lecture 14 Graph Transformers:
+- Lecture 14 Graph Transformers: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/14graphtransformers/14graphtransformers.html
 - Lecture 15 Scaling to Large Graphs:
 - Lecture 16 SNAP Lectures:
 - Lecture 17 Link Prediction and Causality:
