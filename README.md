@@ -18,8 +18,3 @@
 - Lecture 16 SNAP Lectures:
 - Lecture 17 Link Prediction and Causality:
 - Lecture 18 Algorithmic Reasoning with Graphs: 
-- Lecture 19 Conclusion: 
-
-## Hint: Other related material in other repository.
-- Reinforcement Learning: https://github.com/MaxCHENGLONG/1RT747-Reinforcement-Learning-UU
-- Applied Linear Algebra for Data Science: https://github.com/MaxCHENGLONG/1TD060-Applied-Linear-Algebra-for-Data-Science-UU 
