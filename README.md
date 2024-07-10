@@ -17,4 +17,4 @@
 - Lecture 15 Scaling to Large Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/15ScalingtoLargeGraphs/15SLG.html
 - Lecture 16 SNAP Lectures: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/16snap/16snap.html
 - Lecture 17 Link Prediction and Causality: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/17LPC/17lpc.html
-- Lecture 18 Algorithmic Reasoning with Graphs: 
+- Lecture 18 Algorithmic Reasoning with Graphs: https://maxchenglong.github.io/Lecturenotes/Machine-Learning-with-Graph/18gar/18gar.html
